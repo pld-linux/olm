@@ -9,7 +9,12 @@ Source0:	https://gitlab.matrix.org/matrix-org/olm/-/archive/%{version}/%{name}-%
 URL:		https://gitlab.matrix.org/matrix-org/olm
 BuildRequires:	cmake >= 3.4
 BuildRequires:	libstdc++-devel >= 6:4.8.1
-BuildRequires:	rpmbuild(macros) >= 1.605
+BuildRequires:	python3 >= 1:3.6
+BuildRequires:	python3-cffi
+BuildRequires:	python3-devel >= 1:3.6
+BuildRequires:	python3-modules >= 1:3.6
+BuildRequires:	python3-setuptools
+BuildRequires:	rpmbuild(macros) >= 1.714
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -29,6 +34,15 @@ Requires:	%{name} = %{version}-%{release}
 This package contains the header files for developing applications
 that use olm.
 
+%package -n python3-%{name}
+Summary:        Python 3 bindings for %{name} library
+Group:          Development/Languages/Python
+Requires:       %{name} = %{version}-%{release}
+Requires:       python3-modules >= %py3_ver
+
+%description -n python3-%{name}
+Python 3 bindings for %{name} library.
+
 %prep
 %setup -q
 
@@ -38,12 +52,21 @@ cd build
 %cmake ..
 
 %{__make}
+cd ..
+
+cd python
+%py3_build
+cd ..
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+cd python
+%py3_install
+cd ..
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -63,3 +86,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/olm
 %{_pkgconfigdir}/olm.pc
 %{_libdir}/cmake/Olm
+
+%files -n python3-%{name}
+%defattr(644,root,root,755)
+%attr(755,root,root) %{py3_sitedir}/_libolm.abi3.so
+%{py3_sitedir}/olm
+%{py3_sitedir}/python_olm-%{version}-py*.egg-info
