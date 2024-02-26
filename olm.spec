@@ -1,11 +1,11 @@
 Summary:	Implementation of the olm and megolm cryptographic ratchets
 Name:		olm
-Version:	3.2.15
+Version:	3.2.16
 Release:	1
 License:	Apache v2.0
 Group:		Libraries
 Source0:	https://gitlab.matrix.org/matrix-org/olm/-/archive/%{version}/%{name}-%{version}.tar.bz2
-# Source0-md5:	18e62ee5128157f218176d736a9cbe02
+# Source0-md5:	6d16eee08cb58d1d124c88d7e7afe060
 URL:		https://gitlab.matrix.org/matrix-org/olm
 BuildRequires:	cmake >= 3.4
 BuildRequires:	libstdc++-devel >= 6:4.8.1
