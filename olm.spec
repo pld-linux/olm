@@ -1,9 +1,11 @@
 Summary:	Implementation of the olm and megolm cryptographic ratchets
+Summary(pl.UTF-8):	Implementacja zapadek kryptograficznych olm i megolm
 Name:		olm
 Version:	3.2.16
 Release:	1
 License:	Apache v2.0
 Group:		Libraries
+#Source0Download: https://gitlab.matrix.org/matrix-org/olm/-/tags
 Source0:	https://gitlab.matrix.org/matrix-org/olm/-/archive/%{version}/%{name}-%{version}.tar.bz2
 # Source0-md5:	6d16eee08cb58d1d124c88d7e7afe060
 URL:		https://gitlab.matrix.org/matrix-org/olm
@@ -19,29 +21,46 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 An implementation of the Double Ratchet cryptographic ratchet
-described by https://signal.org/docs/specifications/doubleratchet/,
+described by <https://signal.org/docs/specifications/doubleratchet/>,
 written in C and C++11 and exposed as a C API.
 
 This library also includes an implementation of the Megolm
 cryptographic ratchet.
 
+%description -l pl.UTF-8
+Implementacja zapadki kryptograficznej Double Ratchet, opisanej w
+<https://signal.org/docs/specifications/doubleratchet/>, napisana w C
+oraz C++11, udostępniająca API w języku C.
+
+Biblioteka zawiera także implementację zapadki kryptograficznej
+Megolm.
+
 %package devel
-Summary:	Development files for olm
+Summary:	Development files for olm library
+Summary(pl.UTF-8):	Pliki programistyczne biblioteki olm
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
 This package contains the header files for developing applications
-that use olm.
+that use olm library.
+
+%description devel -l pl.UTF-8
+Ten pakiet zawiera pliki nagłówkowe do tworzenia aplikacji
+wykorzystujących bibliotekę olm.
 
 %package -n python3-%{name}
-Summary:        Python 3 bindings for %{name} library
+Summary:        Python 3 bindings for olm library
+Summary(pl.UTF-8):	Wiązania Pythona 3 do biblioteki olm
 Group:          Development/Languages/Python
 Requires:       %{name} = %{version}-%{release}
-Requires:       python3-modules >= %py3_ver
+Requires:       python3-modules >= %{py3_ver}
 
 %description -n python3-%{name}
-Python 3 bindings for %{name} library.
+Python 3 bindings for olm library.
+
+%description -n python3-%{name} -l pl.UTF-8
+Wiązania Pythona 3 do biblioteki olm.
 
 %prep
 %setup -q
@@ -76,7 +95,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README.md
+%doc CHANGELOG.rst README.md docs/*.md
 %attr(755,root,root) %{_libdir}/libolm.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libolm.so.3
 
