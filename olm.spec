@@ -2,7 +2,7 @@ Summary:	Implementation of the olm and megolm cryptographic ratchets
 Summary(pl.UTF-8):	Implementacja zapadek kryptograficznych olm i megolm
 Name:		olm
 Version:	3.2.16
-Release:	1
+Release:	2
 License:	Apache v2.0
 Group:		Libraries
 #Source0Download: https://gitlab.matrix.org/matrix-org/olm/-/tags
